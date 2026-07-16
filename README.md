@@ -1,16 +1,23 @@
-# React + Vite
+# Portfolio - Andy Bustos
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Portfolio cinematográfico y mixed-media de Andy Bustos.
 
-Currently, two official plugins are available:
+## Estructura del Proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Consta de las siguientes secciones inmersivas:
+- **Quién soy**: Libreta animada de perfil.
+- **Dirección**: Proyectos cinematográficos reales con previsualización al hover.
+- **Letras**: Cómics y Storyboards secuenciales con visor paginado.
+- **Diario**: Tablero mixed-media analógico de recortes y anotaciones de guion.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Core**: React + Vite (HTML/JS)
+- **Estilos**: Vanilla CSS
+- **Despliegue**: GitHub Pages (`gh-pages`)
 
-## Expanding the Oxlint configuration
+## Desarrollo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. Instalar dependencias: `npm install`
+2. Servidor de desarrollo: `npm run dev`
+3. Desplegar a GitHub Pages: `npm run deploy`
