@@ -1,0 +1,363 @@
+.journal-section {
+  max-width: 1200px;
+  margin: 6rem auto 3rem;
+  padding: 0 2rem;
+  animation: fade-in 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.journal-header-area {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.journal-subtitle {
+  font-family: var(--font-elegant);
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  max-width: 650px;
+  margin: 0.8rem auto 0;
+  line-height: 1.6;
+}
+
+/* Masonry Scrapbook Board Grid */
+.scrap-board {
+  column-count: 3;
+  column-gap: 2.8rem;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .scrap-board {
+    column-count: 2;
+    column-gap: 2.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .scrap-board {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
+
+/* Scrapbook Item Base Styling */
+.scrap-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 3.5rem;
+  break-inside: avoid;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
+}
+
+/* Media Containment */
+.scrap-media-area {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrap-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(12%) contrast(100%) brightness(93%);
+  transition: filter 0.3s ease;
+}
+
+.scrap-item:hover .scrap-img {
+  filter: grayscale(0%) contrast(102%) brightness(98%);
+}
+
+/* Organic Rotation Angles */
+.rot-left-1 { transform: rotate(-1.2deg); }
+.rot-left-2 { transform: rotate(-2.8deg); }
+.rot-left-3 { transform: rotate(-4.5deg); }
+.rot-right-1 { transform: rotate(1.5deg); }
+.rot-right-2 { transform: rotate(2.9deg); }
+.rot-right-3 { transform: rotate(4.2deg); }
+
+/* Levitating Hover Animation */
+.scrap-item:hover {
+  transform: scale(1.035) rotate(0deg) translateY(-10px) !important;
+  z-index: 10;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* PAPER TYPE 1: Torn Notebook Page */
+.scrap-item.notebook {
+  color-scheme: light;
+  background-color: var(--color-paper);
+  color: var(--color-paper-text);
+  padding: 1.5rem;
+  box-shadow: 2px 5px 12px rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.05);
+  /* Lined school paper effect */
+  background: linear-gradient(rgba(0,0,0,0) 95%, rgba(112, 132, 140, 0.12) 95%) 0 0 / 100% 24px, var(--color-paper);
+}
+
+.scrap-item.notebook .scrap-media-area {
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.scrap-info-notebook {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.scrap-info-notebook .scrap-date {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: var(--color-wine);
+  font-weight: bold;
+}
+
+.scrap-info-notebook .scrap-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-bg-dark);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* PAPER TYPE 2: Classic Polaroid */
+.scrap-item.polaroid {
+  color-scheme: light;
+  background-color: #faf9f6;
+  padding: 12px 12px 24px 12px;
+  box-shadow: 3px 6px 15px rgba(0,0,0,0.32);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.scrap-item.polaroid .scrap-media-area {
+  border: 1px solid rgba(0,0,0,0.1);
+  aspect-ratio: 1 / 1;
+}
+
+.scrap-item.polaroid .scrap-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.scrap-caption-polaroid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+.scrap-date-handwritten {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #7f8c8d;
+}
+
+.scrap-title-handwritten {
+  font-family: 'Monsieur La Doulaise', cursive;
+  font-size: 1.9rem;
+  color: #1e272e;
+  text-align: center;
+  line-height: 1.1;
+  margin-top: 0.2rem;
+}
+
+/* PAPER TYPE 3: Irregular Magazine/Newspaper Clipping */
+.scrap-item.clipping {
+  color-scheme: dark;
+  background-color: #121b1d; /* Slate dark background */
+  padding: 0.6rem;
+  box-shadow: 2px 5px 14px rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.scrap-item.clipping .scrap-img {
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.scrap-item.clipping .scrap-info-notebook {
+  padding: 0.8rem 0.6rem;
+}
+
+.scrap-item.clipping .scrap-info-notebook .scrap-date {
+  color: #ff9f9f; /* High-contrast light pastel rose/coral date text */
+}
+
+.scrap-item.clipping .scrap-info-notebook .scrap-title {
+  color: var(--color-paper); /* Light cream/beige title text */
+}
+
+/* PAPER TYPE 4: Sticky Pastel Note */
+.scrap-item.sticky {
+  color-scheme: light;
+  background-color: #f7dfa3; /* Pastel sticky note */
+  color: #2c3e50;
+  padding: 1.5rem;
+  box-shadow: 3px 6px 14px rgba(0,0,0,0.28);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.scrap-item.sticky .scrap-media-area {
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.scrap-item.sticky:nth-child(odd) {
+  background-color: #e8c3b9; /* alternate pastel rose */
+}
+
+/* Transparent Washi Tape effect */
+.scrap-tape {
+  position: absolute;
+  top: -14px;
+  left: 38%;
+  width: 55px;
+  height: 18px;
+  background-color: rgba(242, 241, 220, 0.4);
+  transform: rotate(-6deg);
+  z-index: 5;
+  backdrop-filter: blur(1.5px);
+  border-left: 2px dashed rgba(0,0,0,0.08);
+  border-right: 2px dashed rgba(0,0,0,0.08);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  pointer-events: none;
+}
+
+.scrap-item:hover .scrap-tape {
+  background-color: rgba(242, 241, 220, 0.55);
+}
+
+/* Text-only sticky note layouts */
+.scrap-item.text-only {
+  cursor: default;
+}
+
+.scrap-text-only-content {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.scrap-title-handwritten-sticky {
+  font-family: 'Monsieur La Doulaise', cursive;
+  font-size: 2.2rem;
+  color: #1e272e;
+  line-height: 1.1;
+  font-weight: normal;
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
+}
+
+.scrap-desc-handwritten-sticky {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #2d3436;
+  line-height: 1.45;
+  font-style: italic;
+  margin: 0;
+}
+
+.scrap-item.text-only.notebook .scrap-title-handwritten-sticky {
+  color: var(--color-bg-dark);
+}
+
+.scrap-item.text-only.notebook .scrap-desc-handwritten-sticky {
+  color: #2c3e50;
+}
+
+/* Journal Lightbox */
+.journal-lightbox-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(7, 35, 38, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  animation: fade-in 0.3s ease forwards;
+}
+
+.journal-lightbox-content {
+  background-color: var(--color-paper);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.65);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: scale-up 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  overflow: hidden;
+}
+
+.journal-lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(7, 35, 38, 0.85);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-paper);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition-smooth);
+}
+
+.journal-lightbox-close:hover {
+  background-color: var(--color-wine);
+  transform: rotate(90deg);
+}
+
+.journal-lightbox-media {
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-height: 68vh;
+}
+
+.journal-lightbox-img {
+  max-width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  display: block;
+}
+
+.journal-lightbox-info {
+  padding: 2.2rem 3rem;
+  background-color: var(--color-paper);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.journal-lightbox-date {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--color-wine);
+  font-weight: bold;
+}
+
+.journal-lightbox-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-bg-dark);
+  font-weight: 700;
+  margin-top: 0.2rem;
+}

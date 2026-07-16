@@ -1,0 +1,248 @@
+import React, { useState } from 'react';
+import './Journal.css';
+
+// Import all 12 mixed-media scanned resources (WebP assets deleted by user removed)
+import imgPoemas from '../assets/Media/Diario-MixedMedia/Apuntes poemas.png';
+import imgCaptura from '../assets/Media/Diario-MixedMedia/Captura de pantalla 2026-06-22 a la(s) 9.23.42 p.m..png';
+import imgEscanear from '../assets/Media/Diario-MixedMedia/Escanear 2.jpg';
+import imgFb1 from '../assets/Media/Diario-MixedMedia/FB_IMG_1668020501501.jpg';
+import imgFb2 from '../assets/Media/Diario-MixedMedia/FB_IMG_1668020523152.jpg';
+import img3752 from '../assets/Media/Diario-MixedMedia/IMG_3752.JPG';
+import img8127 from '../assets/Media/Diario-MixedMedia/IMG_8127.PNG';
+import img9150 from '../assets/Media/Diario-MixedMedia/IMG_9150.jpg';
+import img9151 from '../assets/Media/Diario-MixedMedia/IMG_9151.jpg';
+import img9153 from '../assets/Media/Diario-MixedMedia/IMG_9153.jpg';
+import imgCollage from '../assets/Media/Diario-MixedMedia/collage.png';
+import imgCrucigrama from '../assets/Media/Diario-MixedMedia/crucigrama.png';
+
+const scrapbookItems = [
+  {
+    id: 1,
+    image: imgPoemas,
+    title: "Apuntes & Poemas de Proceso",
+    type: "notebook", // Lined paper, torn borders
+    rotation: "rot-left-2",
+    date: "14 Oct"
+  },
+  {
+    id: 2,
+    image: imgCaptura,
+    title: "Lluvia de Ideas y Estructuras Narrativas",
+    type: "clipping", // Organic clipping
+    rotation: "rot-right-1",
+    date: "22 Jun"
+  },
+  {
+    id: 3,
+    image: imgEscanear,
+    title: "Boceto y Sombras de Escena",
+    type: "notebook",
+    rotation: "rot-left-1",
+    date: "05 Nov"
+  },
+  {
+    id: 4,
+    image: imgFb1,
+    title: "Recortes y Texturas",
+    type: "polaroid", // Classic polaroid style
+    rotation: "rot-right-2",
+    date: "12 Nov"
+  },
+  {
+    id: 5,
+    image: imgFb2,
+    title: "Esquema de Composición",
+    type: "polaroid",
+    rotation: "rot-left-3",
+    date: "12 Nov"
+  },
+  {
+    id: 6,
+    image: img3752,
+    title: "Anotaciones de Diario Íntimo",
+    type: "notebook",
+    rotation: "rot-right-3",
+    date: "08 Sep"
+  },
+  {
+    id: 7,
+    image: img8127,
+    title: "Planos Mixed-Media & Collage",
+    type: "clipping",
+    rotation: "rot-left-2",
+    date: "19 Mar"
+  },
+  {
+    id: 8,
+    image: img9150,
+    title: "Lluvia de Ideas Dirección de Arte",
+    type: "notebook",
+    rotation: "rot-right-1",
+    date: "03 Ago"
+  },
+  {
+    id: 9,
+    image: img9151,
+    title: "Esquema Lumínico y Cromático",
+    type: "notebook",
+    rotation: "rot-left-1",
+    date: "04 Ago"
+  },
+  {
+    id: 10,
+    image: img9153,
+    title: "Notas de Producción y Rodaje",
+    type: "notebook",
+    rotation: "rot-right-2",
+    date: "06 Ago"
+  },
+  {
+    id: 11,
+    image: imgCollage,
+    title: "Boceto de Collage Digital",
+    type: "clipping",
+    rotation: "rot-left-3",
+    date: "15 Ene"
+  },
+  {
+    id: 12,
+    image: imgCrucigrama,
+    title: "Crucigrama Conceptual de Personajes",
+    type: "notebook",
+    rotation: "rot-right-3",
+    date: "28 Feb"
+  },
+  // Text-only Screenwriting Sticky Notes (Click blocked, cursor default)
+  {
+    id: 13,
+    title: "¡Ojo con el detonante!",
+    type: "sticky",
+    rotation: "rot-left-3",
+    content: "El incidente detonante tiene que estallar temprano en pág. 10. No le des tregua al espectador.",
+    isTextOnly: true,
+    date: "Estructura"
+  },
+  {
+    id: 14,
+    title: "Tensión en subtexto",
+    type: "sticky",
+    rotation: "rot-right-2",
+    content: "Menos diálogo verbal, más miradas y Foley. El silencio en el guion debe cortar como vidrio.",
+    isTextOnly: true,
+    date: "Acto II"
+  },
+  {
+    id: 15,
+    title: "Sonido: Lluvia sobre zinc",
+    type: "sticky",
+    rotation: "rot-left-2",
+    content: "Foley orgánico y crudo. Grabar goteo real en cassette portátil. Fusión mixed-media.",
+    isTextOnly: true,
+    date: "Sonido"
+  },
+  {
+    id: 16,
+    title: "Arco de Personaje",
+    type: "sticky",
+    rotation: "rot-right-3",
+    content: "Nadie entra y sale de esta secuencia siendo la misma persona. Romper el equilibrio.",
+    isTextOnly: true,
+    date: "Personajes"
+  },
+  {
+    id: 17,
+    title: "Draft: Polaroid + Super 8",
+    type: "sticky",
+    rotation: "rot-left-1",
+    content: "Intercalar texturas de revelado analógico. El grano de la película revela la verdad del personaje.",
+    isTextOnly: true,
+    date: "Idea Visual"
+  }
+];
+
+export default function Journal() {
+  const [activeItem, setActiveItem] = useState(null);
+
+  const handleItemClick = (item) => {
+    if (!item.isTextOnly) {
+      setActiveItem(item);
+    }
+  };
+
+  return (
+    <section className="journal-section" id="journal-diary-portfolio">
+      <div className="journal-header-area">
+        <h2 className="section-title">Diario & Lluvia de Ideas</h2>
+        <p className="journal-subtitle">
+          Un collage mixed-media de bocetos analógicos, recortes, esquemas de color y anotaciones de rodaje.
+        </p>
+      </div>
+
+      {/* Masonry Scrapbook Board */}
+      <div className="scrap-board" id="scrapbook-board-container">
+        {scrapbookItems.map((item) => (
+          <div
+            key={item.id}
+            id={`scrap-item-${item.id}`}
+            className={`scrap-item ${item.type} ${item.rotation} ${item.isTextOnly ? 'text-only' : ''}`}
+            onClick={() => handleItemClick(item)}
+          >
+            {/* Transparent Adhesive Tape */}
+            <div className="scrap-tape"></div>
+
+            {item.isTextOnly ? (
+              /* Text-only sticky note content */
+              <div className="scrap-text-only-content">
+                <p className="scrap-desc-handwritten-sticky">{item.content}</p>
+              </div>
+            ) : (
+              /* Normal image scrap - Only the image */
+              <div className="scrap-media-area">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="scrap-img"
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Lightbox for scanning details */}
+      {activeItem && (
+        <div
+          className="journal-lightbox-backdrop"
+          id="journal-lightbox-backdrop"
+          onClick={() => setActiveItem(null)}
+        >
+          <div
+            className="journal-lightbox-content"
+            id="journal-lightbox-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="journal-lightbox-close"
+              id="btn-journal-lightbox-close"
+              onClick={() => setActiveItem(null)}
+              aria-label="Cerrar modal"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            <div className="journal-lightbox-media">
+              <img
+                src={activeItem.image}
+                alt={activeItem.title}
+                className="journal-lightbox-img"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}

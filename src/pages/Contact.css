@@ -1,0 +1,150 @@
+.contact-section {
+  max-width: 650px;
+  margin: 6rem auto 3rem;
+  padding: 0 2rem;
+  animation: fade-in 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.contact-card {
+  background-color: var(--color-paper);
+  color: var(--color-paper-text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-premium), 0 5px 15px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 4rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--color-paper-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.contact-intro {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--color-paper-text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-label {
+  font-family: var(--font-elegant);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-wine);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  transition: var(--transition-smooth);
+}
+
+/* Notebook ruled line inputs */
+.form-input, .form-textarea {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-paper-border);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  color: var(--color-paper-text);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-textarea {
+  resize: none;
+  height: 100px;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-bottom-color: var(--color-wine-light);
+  box-shadow: 0 1px 0 var(--color-wine-light);
+}
+
+/* Premium submit button */
+.btn-submit {
+  font-family: var(--font-elegant);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-text-light);
+  background-color: var(--color-wine);
+  border: 1px solid var(--color-wine-light);
+  border-radius: 4px;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  align-self: center;
+  transition: var(--transition-smooth);
+  margin-top: 1rem;
+}
+
+.btn-submit:hover {
+  background-color: var(--color-wine-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px var(--color-wine-shadow);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.contact-success {
+  text-align: center;
+  padding: 2rem 0;
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.contact-success-icon {
+  font-size: 3rem;
+  color: var(--color-wine-light);
+  margin-bottom: 1rem;
+}
+
+.contact-success-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-wine);
+  margin-bottom: 0.5rem;
+}
+
+.contact-success-desc {
+  font-family: var(--font-elegant);
+  font-size: 1.15rem;
+  color: var(--color-paper-text-muted);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 2.5rem 2rem;
+  }
+  
+  .contact-section {
+    margin-top: 5rem;
+    padding: 0 1.5rem;
+  }
+}
