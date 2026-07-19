@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import Notebook from '../components/Notebook';
 import { screenplaySnippets } from '../data/portfolioData';
 import './Screenplay.css';
 
-// Import Comic Pages
+// Import Comic Pages and Cover
+import comicCover from '../assets/Media/Comic/portada real, cuervo.png';
 import comic1 from '../assets/Media/Comic/Comic1.jpg';
 import comic2 from '../assets/Media/Comic/Comic2.jpg';
 import comic3 from '../assets/Media/Comic/Comic3.jpg';
@@ -10,12 +13,14 @@ import comic4 from '../assets/Media/Comic/Comic4.jpg';
 import comic5 from '../assets/Media/Comic/Comic5.jpg';
 
 // Import Storyboard Panels
+import storyboardCover from '../assets/Media/Storyboards/Renacer portada.png';
 import story1 from '../assets/Media/Storyboards/story1.png';
 import story2 from '../assets/Media/Storyboards/story2.png';
 import story3 from '../assets/Media/Storyboards/story3.png';
 import story4 from '../assets/Media/Storyboards/story4.png';
 
 const comicPagesList = [
+  { id: 0, src: comicCover, label: "Portada - El Cuervo" },
   { id: 1, src: comic1, label: "Cómic - Página 1" },
   { id: 2, src: comic2, label: "Cómic - Página 2" },
   { id: 3, src: comic3, label: "Cómic - Página 3" },
@@ -24,6 +29,7 @@ const comicPagesList = [
 ];
 
 const storyboardPanelsList = [
+  { id: 0, src: storyboardCover, label: "Portada - Renacer" },
   { id: 1, src: story1, label: "Plano 1 - Escena Inicial" },
   { id: 2, src: story2, label: "Plano 2 - Acercamiento" },
   { id: 3, src: story3, label: "Plano 3 - Transición" },
@@ -33,6 +39,17 @@ const storyboardPanelsList = [
 export default function Screenplay() {
   const [activeSubTab, setActiveSubTab] = useState('storyboard'); // 'scripts' | 'storyboard' | 'comic' (currently 'scripts' is hidden)
   const [lightboxAsset, setLightboxAsset] = useState(null); // { type, list, index }
+
+  useEffect(() => {
+    if (lightboxAsset) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [lightboxAsset]);
 
   const handlePrev = (e) => {
     e.stopPropagation();
@@ -52,6 +69,126 @@ export default function Screenplay() {
     }));
   };
 
+  const handleNotebookImageClick = (imageSrc, isComic) => {
+    const list = isComic ? comicPagesList : storyboardPanelsList;
+    const index = list.findIndex(item => item.src === imageSrc);
+    if (index !== -1) {
+      setLightboxAsset({
+        type: isComic ? 'comic' : 'storyboard',
+        list: list,
+        index: index
+      });
+    }
+  };
+
+  const storyboardNotebookPages = [
+    {
+      leftPage: {
+        type: 'image',
+        src: storyboardCover,
+        alt: "Portada - Renacer",
+        fitMode: 'contain'
+      },
+      rightPage: {
+        type: 'metadata',
+        title: "Renacer",
+        synopsis: [
+          "Poema visual que reflexiona sobre la transformación y los cambios inevitables de la vida. Explora la idea de que la identidad está en constante construcción y compuesta por múltiples versiones.",
+          "A través de imágenes poéticas y recursos simbólicos, la obra presenta un universo donde la incertidumbre y la esperanza conviven, mostrando la capacidad humana de reconstruirse y seguir avanzando incluso en medio del cambio."
+        ],
+        specs: {
+          "Título": "Renacer",
+          "Formato": "Cortometraje experimental / Video poema",
+          "Estado actual": "En desarrollo",
+          "Duración": "4 minutos (estimada)",
+          "Género": "Poesía audiovisual / Experimental",
+          "Técnica": "Live Action + Animación Cut-out + Motion Graphics",
+          "Guion y Dir.": "Mariana Andrea Bustos Gómez"
+        }
+      }
+    },
+    {
+      leftPage: {
+        type: 'images',
+        images: [story1, story2]
+      },
+      rightPage: {
+        type: 'images',
+        images: [story3, story4]
+      }
+    }
+  ];
+
+  const comicNotebookPages = [
+    {
+      leftPage: {
+        type: 'image',
+        src: comicCover,
+        alt: "Portada - El Cuervo",
+        fitMode: 'contain'
+      },
+      rightPage: {
+        type: 'metadata',
+        title: "El Cuervo y La Muerte",
+        synopsis: [
+          "Durante el caos de la Segunda Guerra Mundial, Cuervo, un joven de dieciséis años que ha perdido a toda su familia, encuentra refugio en un sombrío orfanato nazi.",
+          "Allí descubre que la presencia que lo ha perseguido desde la tragedia no es producto de su dolor, sino la Muerte misma, una entidad solitaria que anhela compañía.",
+          "Tras sellar un insólito pacto con ella —detener las muertes mientras Cuervo sea capaz de encontrar belleza en la vida—, el joven comienza a redescubrir la esperanza gracias a su amistades del orfanato."
+        ],
+        specs: {
+          "Título": "El Cuervo y La Muerte",
+          "Género": "Drama / Fantasía oscura / Realismo mágico",
+          "Formato": "Piloto de serie limitada",
+          "Duración": "60 min (estimada)",
+          "Público": "Jóvenes adultos y adultos",
+          "Ambientación": "Segunda Guerra Mundial y posguerra (Alemania, 1945 - 1950s)"
+        }
+      }
+    },
+    {
+      leftPage: {
+        type: 'image',
+        src: comic1,
+        alt: "Cómic Página 1",
+        fitMode: 'contain'
+      },
+      rightPage: {
+        type: 'image',
+        src: comic2,
+        alt: "Cómic Página 2",
+        fitMode: 'contain'
+      }
+    },
+    {
+      leftPage: {
+        type: 'image',
+        src: comic3,
+        alt: "Cómic Página 3",
+        fitMode: 'contain'
+      },
+      rightPage: {
+        type: 'image',
+        src: comic4,
+        alt: "Cómic Página 4",
+        fitMode: 'contain'
+      }
+    },
+    {
+      leftPage: {
+        type: 'image',
+        src: comic5,
+        alt: "Cómic Página 5",
+        fitMode: 'contain'
+      },
+      rightPage: {
+        type: 'image',
+        src: '',
+        placeholder: '',
+        fitMode: 'contain'
+      }
+    }
+  ];
+
   return (
     <section className="screenplay-section" id="screenplay-portfolio">
       <h2 className="section-title">Letras & Escritura Visual</h2>
@@ -61,15 +198,6 @@ export default function Screenplay() {
 
       {/* Sub-tabs Navigation */}
       <div className="letras-subtabs-nav" id="letras-subtabs-nav-bar">
-        {/* Guiones tab is hidden for now, reactivate if scripts are added back
-        <button
-          className={`subtab-btn ${activeSubTab === 'scripts' ? 'active' : ''}`}
-          onClick={() => setActiveSubTab('scripts')}
-          id="btn-subtab-scripts"
-        >
-          Guiones
-        </button>
-        */}
         <button
           className={`subtab-btn ${activeSubTab === 'storyboard' ? 'active' : ''}`}
           onClick={() => setActiveSubTab('storyboard')}
@@ -86,7 +214,7 @@ export default function Screenplay() {
         </button>
       </div>
 
-      {/* TAB CONTENT 1: Screenplay scripts sheets */}
+      {/* TAB CONTENT 1: Screenplay scripts sheets (hidden) */}
       {activeSubTab === 'scripts' && (
         <div className="script-container" id="screenplay-scripts-list">
           {screenplaySnippets.map((script) => (
@@ -112,54 +240,26 @@ export default function Screenplay() {
         </div>
       )}
 
-      {/* TAB CONTENT 2: Storyboard panels */}
+      {/* TAB CONTENT 2: Storyboard panels in Notebook */}
       {activeSubTab === 'storyboard' && (
-        <div className="letras-visual-grid" id="storyboard-panels-grid">
-          {storyboardPanelsList.map((panel, idx) => (
-            <div
-              key={panel.id}
-              className="letras-visual-card"
-              onClick={() => setLightboxAsset({ type: 'storyboard', list: storyboardPanelsList, index: idx })}
-            >
-              <div className="letras-visual-media">
-                <img src={panel.src} alt={panel.label} className="letras-visual-img" />
-                <div className="letras-visual-overlay">
-                  <span>Plano {panel.id}</span>
-                </div>
-              </div>
-              <div className="letras-visual-caption">
-                <span className="letras-visual-label">{panel.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Notebook
+          key="storyboard-notebook"
+          pages={storyboardNotebookPages}
+          onImageClick={(src) => handleNotebookImageClick(src, false)}
+        />
       )}
 
-      {/* TAB CONTENT 3: Comic pages */}
+      {/* TAB CONTENT 3: Comic pages in Notebook */}
       {activeSubTab === 'comic' && (
-        <div className="letras-visual-grid" id="comic-pages-grid">
-          {comicPagesList.map((page, idx) => (
-            <div
-              key={page.id}
-              className="letras-visual-card"
-              onClick={() => setLightboxAsset({ type: 'comic', list: comicPagesList, index: idx })}
-            >
-              <div className="letras-visual-media">
-                <img src={page.src} alt={page.label} className="letras-visual-img" />
-                <div className="letras-visual-overlay">
-                  <span>Página {page.id}</span>
-                </div>
-              </div>
-              <div className="letras-visual-caption">
-                <span className="letras-visual-label">{page.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Notebook
+          key="comic-notebook"
+          pages={comicNotebookPages}
+          onImageClick={(src) => handleNotebookImageClick(src, true)}
+        />
       )}
 
       {/* Paged Lightbox Visualizer for Comics & Storyboards */}
-      {lightboxAsset && (
+      {lightboxAsset && createPortal(
         <div
           className="letras-lightbox-backdrop"
           id="letras-lightbox-backdrop"
@@ -220,7 +320,8 @@ export default function Screenplay() {
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

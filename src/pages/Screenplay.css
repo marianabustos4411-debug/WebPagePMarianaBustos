@@ -15,6 +15,12 @@
   line-height: 1.6;
 }
 
+.screenplay-section .notebook-container {
+  margin-top: 1.5rem;
+  max-width: 100%;
+  padding: 0;
+}
+
 .script-container {
   display: flex;
   flex-direction: column;

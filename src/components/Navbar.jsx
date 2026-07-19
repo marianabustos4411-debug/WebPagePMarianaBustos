@@ -9,7 +9,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
     { id: 'about', label: 'Quién soy', subtitle: '(Archivo)' },
     { id: 'art', label: 'Dirección', subtitle: '(Arte)' },
     { id: 'screenplay', label: 'Letras', subtitle: '(Secuencias)' },
-    { id: 'journal', label: 'Diario', subtitle: '(Lluvia de ideas)' },
+    { id: 'journal', label: 'Diario', subtitle: '(Proceso)' },
     { id: 'contact', label: 'Contacto', subtitle: '' },
   ];
 

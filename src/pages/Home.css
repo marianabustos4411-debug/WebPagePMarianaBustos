@@ -78,17 +78,18 @@
 }
 
 .home-title-initial {
-  font-family: var(--font-script);
-  font-size: 1.45em;
+  font-family: 'Luxurious Script', cursive;
+  font-size: 1.85em;
   color: var(--color-wine-light);
   display: inline-block;
   vertical-align: middle;
   transform: translateY(-0.06em);
   padding-right: 0px;
+  -webkit-text-stroke: 0.5px var(--color-wine-light);
 }
 
 .home-title-secondary {
-  font-family: var(--font-serif);
+  font-family: 'Bodoni Moda', serif;
   font-size: 0.95em;
   font-weight: 700;
   color: var(--color-wine-light);
@@ -97,7 +98,14 @@
   vertical-align: middle;
   transform: scaleX(0.82);
   transform-origin: left center;
-  margin-left: -0.22em; /* negative gap adjustment in relative em units */
+}
+
+.home-title-name .home-title-secondary {
+  margin-left: 0.08em; /* Separación para "ndy" respecto a la "A" */
+}
+
+.home-title-surname .home-title-secondary {
+  margin-left: -0.04em; /* Acerca "ustos" un poco más a la "B" */
 }
 
 /* Vertical Scroll Indicator */

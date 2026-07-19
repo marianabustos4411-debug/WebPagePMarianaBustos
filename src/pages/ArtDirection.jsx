@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './ArtDirection.css';
 
 // Import local covers (Portadas)
@@ -21,43 +22,62 @@ const artProjectsList = [
     title: "Abandonados",
     category: "Dirección de Arte / Cortometraje",
     description: "Estudio visual y diseño de atmósferas opresivas basadas en espacios abandonados y texturas desgastadas.",
-    year: "2025",
+    year: "2024",
+    genre: "Drama",
+    specs: "6 min. 37 seg. / color",
+    synopsis: "En un mundo apocalíptico marcado por la escasez, un padre lucha desesperadamente por conseguir alimento para su hija. A medida que los recursos se agotan, debe tomar una decisión irreversible: cometer un acto atroz con tal de ofrecerle un último festín.\n\nEntre el amor y la supervivencia, la historia explora los límites morales que se desdibujan cuando lo único que queda es proteger a quien más amas.",
+    notes: "Mi primer experiencia siendo directora de diseño de vestuario, enfocando en ambientacion postapocalíptica, así como la ejecucion de set",
     cover: coverAbandonados,
     video: videoAbandonados
   },
   {
     id: "hqnvav",
     title: "HQNVAV",
-    category: "Diseño Visual / Animación",
+    category: "Asistente de Arte / VideoClip",
     description: "Cortometraje experimental centrado en la interacción del color carmesí y azul pizarra sobre soportes análogos.",
     year: "2024",
+    genre: "VideoClip",
+    specs: "4 min. 5 seg. / color & blanco y negro",
+    synopsis: "Un artista atraviesa una ruptura emocional mientras su proceso creativo se fragmenta en dos momentos: la creación y la reflexión. Entre ambos, la obra se convierte en un espacio para confrontar la ausencia.",
+    notes: "Uno de los principales motivos por los que decidí estudiar esta carrera fue el profundo amor que siento por las distintas formas de arte, especialmente la música. En este proyecto realicé un videoclip musical, explorando la relación entre lo que se dice y lo que se siente, y cómo la narrativa visual puede ampliar el significado de una canción a través de las emociones, la imagen y el ritmo.",
     cover: coverHqnvav,
     video: videoHqnvav
   },
   {
     id: "dia-soleado",
     title: "Hoy fue un día soleado",
-    category: "Dirección de Arte / Stop-Motion",
+    category: "Diseño de producción y vestuario",
     description: "Composición visual y diseño escénico utilizando elementos cotidianos y acuarelas sobre papel marfil.",
-    year: "2025",
+    year: "2024",
+    genre: "Suspenso y experimental",
+    specs: "10 min. 6 seg. / color",
+    synopsis: "Gonzalo enfrenta la muerte de su novia, asesinada durante una marcha estudiantil en los años 70. Atrapado entre el duelo y la memoria, busca reencontrarse con ella a través de un vínculo que trasciende el tiempo y la realidad.",
+    notes: "Uno de los proyectos que más representa mi voz como creadora. A través de una narrativa experimental, explora la muerte de una joven que viaja a la Ciudad de México para participar en la marcha estudiantil del Halconazo. Creo que el arte también existe para mirar de frente aquello que resulta incómodo, pero necesario.",
     cover: coverSoleado,
     video: videoSoleado
   },
   {
     id: "maquillaje-golpes",
     title: "Maquillaje de Golpes",
-    category: "Caracterización / Maquillaje FX",
+    category: "Caracterización y Maquillaje FX",
     description: "Diseño y aplicación de maquillaje FX de alta fidelidad para simular contusiones y heridas de combate de forma realista.",
     year: "2024",
+    genre: "Lesiones y Heridas",
+    synopsis: "• Golpes y contusiones • Quemaduras\n\nMaquillaje Prostético:\n• Escultura funeraria",
     cover: coverMaquillaje,
     video: videoMaquillaje
   },
   {
     id: "mixed-media-project",
     title: "Mixed Media",
-    category: "Dirección de Arte / Animación",
+    category: "Dirección, Producción y Diseño de producción / Animación",
     description: "Fusión experimental de collage analógico impreso, recortes de prensa y técnicas digitales animadas.",
-    year: "2025",
+    year: "2024",
+    genre: "Animación",
+    specs: "1 min. 24 seg. / color & blanco y negro",
+    synopsis: "Edición cuadro por cuadro que reúne distintas películas a través de formas, ritmos y trazos, creando una narrativa visual continua en la que los personajes se conectan mediante el movimiento, particularmente a través de la acción de correr.",
+    notes: "Este proyecto tiene un significado especial para mí, ya que marcó el inicio de la primera producción realizada junto a la productora que fundé con mis amigos. Participé en el desarrollo de la idea y decidí experimentar con la técnica de mixed media, una de mis formas de expresión visual favoritas, integrándola como un recurso narrativo para fortalecer la identidad del proyecto.",
+    exhibitions: "• Museo de Arte Contemporáneo (MAC)\n• Cineteca Alameda SL",
     cover: coverMixedMedia,
     video: videoMixedMedia
   }
@@ -111,6 +131,17 @@ function ArtCard({ project, onSelect }) {
 export default function ArtDirection() {
   const [selectedProject, setSelectedProject] = useState(null);
 
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedProject]);
+
   return (
     <section className="art-section" id="art-direction-portfolio">
       <h2 className="section-title">Dirección de Arte & Diseño Visual</h2>
@@ -126,7 +157,7 @@ export default function ArtDirection() {
       </div>
 
       {/* Lightbox details modal with interactive video controls */}
-      {selectedProject && (
+      {selectedProject && createPortal(
         <div
           className="lightbox-backdrop"
           id="art-lightbox-backdrop"
@@ -164,13 +195,46 @@ export default function ArtDirection() {
             <div className="lightbox-info">
               <div className="lightbox-header">
                 <h3 className="lightbox-title">{selectedProject.title}</h3>
-                <span className="art-card-year" style={{ fontSize: '1.3rem' }}>{selectedProject.year}</span>
+                <span className="lightbox-year-specs">
+                  {selectedProject.year} {selectedProject.specs ? `• ${selectedProject.specs}` : ''}
+                </span>
               </div>
-              <div className="lightbox-category">{selectedProject.category}</div>
-              <p className="lightbox-desc">{selectedProject.description}</p>
+              <div className="lightbox-category">
+                {selectedProject.genre ? `${selectedProject.genre} | ` : ''}{selectedProject.category}
+              </div>
+              
+              {!selectedProject.synopsis && (
+                <p className="lightbox-desc">{selectedProject.description}</p>
+              )}
+
+              {selectedProject.synopsis && (
+                <div className="lightbox-synopsis-section">
+                  <h4 className="lightbox-section-subtitle">
+                    {selectedProject.id === 'maquillaje-golpes' ? 'Especialidades' : 'Sinopsis'}
+                  </h4>
+                  {selectedProject.synopsis.split('\n\n').map((paragraph, idx) => (
+                    <p key={idx} className="lightbox-synopsis-p">{paragraph}</p>
+                  ))}
+                </div>
+              )}
+
+              {selectedProject.notes && (
+                <div className="lightbox-notes-section">
+                  <h4 className="lightbox-section-subtitle">Notas de la Cineasta</h4>
+                  <p className="lightbox-notes-p">{selectedProject.notes}</p>
+                </div>
+              )}
+
+              {selectedProject.exhibitions && (
+                <div className="lightbox-exhibitions-section">
+                  <h4 className="lightbox-section-subtitle">Presentaciones</h4>
+                  <p className="lightbox-exhibitions-p">{selectedProject.exhibitions}</p>
+                </div>
+              )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

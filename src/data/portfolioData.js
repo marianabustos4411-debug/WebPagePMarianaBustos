@@ -3,7 +3,7 @@ export const whoAmIPages = [
     leftPage: {
       title: "¿Quién soy?",
       content: [
-        "Soy una cineasta multidisciplinaria y artista visual, originaria de Ciudad de México, egresada en cine y animación digital por la Universidad de Tecnologías Avanzadas (UNIAT)."
+        "Soy una cineasta multidisciplinaria y artista visual originaria de Ciudad de México, egresada de la licenciatura en Cine y Animación Digital por la Universidad de Tecnologías Avanzadas (UNIAT). Mi trabajo nace de la búsqueda por transformar emociones, recuerdos y espacios en experiencias visuales que conecten con quienes las observan."
       ]
     },
     rightPage: {
@@ -16,26 +16,13 @@ export const whoAmIPages = [
     leftPage: {
       title: "¿Quién soy?",
       content: [
-        "Mi trabajo explora los límites entre el cine narrativo tradicional y las texturas del mixed-media. A través de la combinación de técnicas análogas y digitales, busco evocar estados emocionales crudos y atmósferas envolventes."
+        "Me interesa explorar la relación entre el cine, el diseño, el guion, la animación y el mixed-media, combinando procesos digitales y análogos para construir narrativas donde la textura, la luz, el color y el sonido se convierten en parte esencial del lenguaje. Concibo cada proyecto como una oportunidad para crear historias que permanezcan en la memoria, despierten curiosidad, inviten a la reflexión y generen una conexión emocional con el espectador."
       ]
     },
     rightPage: {
       type: "image",
       src: "",
       placeholder: "[ fotograma de cortometraje ]"
-    }
-  },
-  {
-    leftPage: {
-      title: "¿Quién soy?",
-      content: [
-        "Desde la dirección de arte hasta la escritura de guion, concibo cada proyecto como un lienzo donde el sonido, la textura y la luz juegan papeles protagónicos."
-      ]
-    },
-    rightPage: {
-      type: "image",
-      src: "",
-      placeholder: "[ boceto conceptual ]"
     }
   }
 ];

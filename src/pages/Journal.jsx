@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './Journal.css';
 
 // Import all 12 mixed-media scanned resources (WebP assets deleted by user removed)
@@ -33,6 +34,15 @@ const scrapbookItems = [
     date: "22 Jun"
   },
   {
+    id: 13,
+    title: "En las letras",
+    type: "sticky",
+    rotation: "rot-right-2",
+    content: "“Porque en cada letra aún puedo sentirte conmigo.”",
+    isTextOnly: true,
+    date: "Nota"
+  },
+  {
     id: 3,
     image: imgEscanear,
     title: "Boceto y Sombras de Escena",
@@ -47,6 +57,15 @@ const scrapbookItems = [
     type: "polaroid", // Classic polaroid style
     rotation: "rot-right-2",
     date: "12 Nov"
+  },
+  {
+    id: 14,
+    title: "Latidos",
+    type: "sticky",
+    rotation: "rot-left-3",
+    content: "“Y tengo demasiados latidos para tan poco pecho”",
+    isTextOnly: true,
+    date: "Nota"
   },
   {
     id: 5,
@@ -65,6 +84,15 @@ const scrapbookItems = [
     date: "08 Sep"
   },
   {
+    id: 15,
+    title: "Formas de sueños",
+    type: "sticky",
+    rotation: "rot-right-1",
+    content: "“En esta casa todos los días hablamos de ti. Y de cómo esperamos que te aparezcas. En formas de sueños.”",
+    isTextOnly: true,
+    date: "Nota"
+  },
+  {
     id: 7,
     image: img8127,
     title: "Planos Mixed-Media & Collage",
@@ -79,6 +107,15 @@ const scrapbookItems = [
     type: "notebook",
     rotation: "rot-right-1",
     date: "03 Ago"
+  },
+  {
+    id: 16,
+    title: "Probar la vida",
+    type: "sticky",
+    rotation: "rot-left-2",
+    content: "“Nosotras escribimos para probar la vida dos veces.”",
+    isTextOnly: true,
+    date: "Cita"
   },
   {
     id: 9,
@@ -97,6 +134,15 @@ const scrapbookItems = [
     date: "06 Ago"
   },
   {
+    id: 17,
+    title: "Eco",
+    type: "sticky",
+    rotation: "rot-right-3",
+    content: "“Se me acumulan preguntas. Que hacen eco y vuelven vacías. Pero con atención, escucho tu amor.”",
+    isTextOnly: true,
+    date: "Nota"
+  },
+  {
     id: 11,
     image: imgCollage,
     title: "Boceto de Collage Digital",
@@ -111,57 +157,22 @@ const scrapbookItems = [
     type: "notebook",
     rotation: "rot-right-3",
     date: "28 Feb"
-  },
-  // Text-only Screenwriting Sticky Notes (Click blocked, cursor default)
-  {
-    id: 13,
-    title: "¡Ojo con el detonante!",
-    type: "sticky",
-    rotation: "rot-left-3",
-    content: "El incidente detonante tiene que estallar temprano en pág. 10. No le des tregua al espectador.",
-    isTextOnly: true,
-    date: "Estructura"
-  },
-  {
-    id: 14,
-    title: "Tensión en subtexto",
-    type: "sticky",
-    rotation: "rot-right-2",
-    content: "Menos diálogo verbal, más miradas y Foley. El silencio en el guion debe cortar como vidrio.",
-    isTextOnly: true,
-    date: "Acto II"
-  },
-  {
-    id: 15,
-    title: "Sonido: Lluvia sobre zinc",
-    type: "sticky",
-    rotation: "rot-left-2",
-    content: "Foley orgánico y crudo. Grabar goteo real en cassette portátil. Fusión mixed-media.",
-    isTextOnly: true,
-    date: "Sonido"
-  },
-  {
-    id: 16,
-    title: "Arco de Personaje",
-    type: "sticky",
-    rotation: "rot-right-3",
-    content: "Nadie entra y sale de esta secuencia siendo la misma persona. Romper el equilibrio.",
-    isTextOnly: true,
-    date: "Personajes"
-  },
-  {
-    id: 17,
-    title: "Draft: Polaroid + Super 8",
-    type: "sticky",
-    rotation: "rot-left-1",
-    content: "Intercalar texturas de revelado analógico. El grano de la película revela la verdad del personaje.",
-    isTextOnly: true,
-    date: "Idea Visual"
   }
 ];
 
 export default function Journal() {
   const [activeItem, setActiveItem] = useState(null);
+
+  useEffect(() => {
+    if (activeItem) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeItem]);
 
   const handleItemClick = (item) => {
     if (!item.isTextOnly) {
@@ -172,7 +183,7 @@ export default function Journal() {
   return (
     <section className="journal-section" id="journal-diary-portfolio">
       <div className="journal-header-area">
-        <h2 className="section-title">Diario & Lluvia de Ideas</h2>
+        <h2 className="section-title">Diario</h2>
         <p className="journal-subtitle">
           Un collage mixed-media de bocetos analógicos, recortes, esquemas de color y anotaciones de rodaje.
         </p>
@@ -210,7 +221,7 @@ export default function Journal() {
       </div>
 
       {/* Lightbox for scanning details */}
-      {activeItem && (
+      {activeItem && createPortal(
         <div
           className="journal-lightbox-backdrop"
           id="journal-lightbox-backdrop"
@@ -241,7 +252,8 @@ export default function Journal() {
               />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
