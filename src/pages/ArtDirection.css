@@ -46,6 +46,7 @@
   border-bottom: 2px solid var(--color-wine);
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .art-card-media::before {
@@ -204,6 +205,7 @@
   align-items: center;
   border-bottom: 3px solid var(--color-wine);
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .lightbox-video {
@@ -317,5 +319,41 @@
   
   .lightbox-info {
     padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .lightbox-backdrop {
+    padding: 0.8rem;
+  }
+  
+  .lightbox-info {
+    padding: 1.8rem 1.2rem;
+  }
+  
+  .lightbox-title {
+    font-size: 1.6rem;
+  }
+  
+  .lightbox-category {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lightbox-close {
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 34px;
+    height: 34px;
+  }
+  
+  .lightbox-section-subtitle {
+    font-size: 1.05rem;
+    margin-top: 1.4rem;
+  }
+  
+  .lightbox-synopsis-p, .lightbox-notes-p, .lightbox-exhibitions-p {
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 }
