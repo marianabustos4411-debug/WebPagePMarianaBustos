@@ -1,3 +1,6 @@
+import imgPerfil1 from '../assets/Media/ImagenesPerfil/Primera foto.png';
+import imgPerfil2 from '../assets/Media/ImagenesPerfil/Segunda foto web.png';
+
 export const whoAmIPages = [
   {
     leftPage: {
@@ -8,7 +11,7 @@ export const whoAmIPages = [
     },
     rightPage: {
       type: "image",
-      src: "", // Will render a beautiful placeholder inside the Notebook component if empty
+      src: imgPerfil1,
       placeholder: "[ foto mia ]"
     }
   },
@@ -21,7 +24,7 @@ export const whoAmIPages = [
     },
     rightPage: {
       type: "image",
-      src: "",
+      src: imgPerfil2,
       placeholder: "[ fotograma de cortometraje ]"
     }
   }
