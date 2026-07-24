@@ -1,15 +1,9 @@
 import React from 'react';
 import './FloatingButtons.css';
+import cvImage from '../assets/Media/Cv.png';
 
-// ==========================================
-// CONFIGURACIÓN DE ENLACES
-// Reemplaza '#' por las URLs correspondientes:
-// Ejemplos: 
-//   CV_LINK: "/CV_Andy_Bustos.pdf" (guarda el PDF en la carpeta public)
-//   REEL_LINK: "https://vimeo.com/..." o "https://youtube.com/..."
-// ==========================================
-const CV_LINK = '#';
-const REEL_LINK = '#';
+const CV_LINK = cvImage;
+const PORTFOLIO_LINK = 'https://canva.link/v20c708hv5q8vev';
 
 export default function FloatingButtons() {
   return (
@@ -18,7 +12,7 @@ export default function FloatingButtons() {
       <a
         href={CV_LINK}
         className="floating-btn cv-btn"
-        target={CV_LINK !== '#' ? "_blank" : undefined}
+        target="_blank"
         rel="noopener noreferrer"
         aria-label="Ver currículum vitae"
         id="btn-float-cv"
@@ -35,21 +29,22 @@ export default function FloatingButtons() {
         <span className="floating-btn-text">Ver CV</span>
       </a>
 
-      {/* Demo Reel Button */}
+      {/* Portfolio Button */}
       <a
-        href={REEL_LINK}
-        className="floating-btn reel-btn"
-        target={REEL_LINK !== '#' ? "_blank" : undefined}
+        href={PORTFOLIO_LINK}
+        className="floating-btn portfolio-btn"
+        target="_blank"
         rel="noopener noreferrer"
-        aria-label="Ver demo reel"
-        id="btn-float-reel"
+        aria-label="Ver portafolio de Canva"
+        id="btn-float-portfolio"
       >
         <div className="floating-btn-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
         </div>
-        <span className="floating-btn-text">Ver Reel</span>
+        <span className="floating-btn-text">Portafolio</span>
       </a>
     </div>
   );
