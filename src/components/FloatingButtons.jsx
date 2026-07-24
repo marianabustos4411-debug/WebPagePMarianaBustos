@@ -1,8 +1,8 @@
 import React from 'react';
 import './FloatingButtons.css';
-import cvImage from '../assets/Media/Cv.png';
+import cvPdf from '../assets/Media/Cv Andy.pdf';
 
-const CV_LINK = cvImage;
+const CV_LINK = cvPdf;
 const PORTFOLIO_LINK = 'https://canva.link/v20c708hv5q8vev';
 
 export default function FloatingButtons() {
