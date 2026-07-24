@@ -1,9 +1,10 @@
 import React from 'react';
 import './FloatingButtons.css';
 import cvPdf from '../assets/Media/Cv Andy.pdf';
+import portfolioPdf from '../assets/Media/Portafolio Diseño de Producción.pdf';
 
 const CV_LINK = cvPdf;
-const PORTFOLIO_LINK = 'https://canva.link/v20c708hv5q8vev';
+const PORTFOLIO_LINK = portfolioPdf;
 
 export default function FloatingButtons() {
   return (
